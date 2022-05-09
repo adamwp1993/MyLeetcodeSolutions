@@ -17,15 +17,15 @@ class Solution {
     List<List<Integer>> answer = new ArrayList<List<Integer>>();
 
     public void levelHelper(TreeNode node, int level) {
-        // start the current level
+        // Add a level to the 2D list 
         if (answer.size() == level) {
             answer.add(new ArrayList<Integer>());
         }
 
-         // fulfil the current level
+         // add the root value
          answer.get(level).add(node.val);
 
-         // process child nodes for the next level
+         // recursively call for child nodes 
          if (node.left != null) {
             levelHelper(node.left, level + 1);
          }
