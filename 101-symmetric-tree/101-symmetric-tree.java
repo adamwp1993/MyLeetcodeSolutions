@@ -24,14 +24,14 @@ class Solution {
         }
     
     
-    public boolean isMirror(TreeNode t1, TreeNode t2) {
-        if(t1 == null && t2 == null) { return true; }
-        if(t1 == null || t2 == null) { return false; }
+    public boolean isMirror(TreeNode node1, TreeNode node2) {
+        if(node1 == null && node2 == null) { return true; }
+        if(node1 == null || node2 == null) { return false; }
 
 
-        return (t1.val == t2.val) 
-            && isMirror(t1.right, t2.left) 
-            && isMirror(t1.left , t2.right);  
+        return (node1.val == node2.val) 
+            && isMirror(node1.right, node2.left) 
+            && isMirror(node1.left , node2.right);  
         
         }
 }
