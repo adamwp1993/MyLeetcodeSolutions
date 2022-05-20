@@ -29,12 +29,18 @@ class Solution {
         if(root == null) {
             return null;
         }
-        traverse(root.left, val);
+        // Binary search tree - we dont have to visit all nodes 
+        // determine direction based on if val is less or more than current nodes value. 
+        if(val < root.val) {
+            traverse(root.left, val);
+        }
         
         if(root.val == val) {
             result = root;
         }
-        traverse(root.right, val);
+        if(val > root.val) {
+            traverse(root.right, val);
+        }
         return null;
     }
     
