@@ -25,9 +25,13 @@ class Solution {
         if(root.val >= low && root.val <= high) {
             sum += root.val;
         }
-        sum += traverse(root.left, low, high);
-        sum += traverse(root.right, low, high);
-        
+        // since its a BST no need to traverse values we know will be too high or low 
+        if(low <= root.val) {
+            sum += traverse(root.left, low, high);
+        }
+        if(high >= root.val) {
+            sum += traverse(root.right, low, high);
+        }
         return sum;
     }
 }
