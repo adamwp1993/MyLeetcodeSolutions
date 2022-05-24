@@ -19,28 +19,32 @@ class Solution {
     
     public boolean findTarget(TreeNode root, int k) {
         
-        return traverse(root, k);
-    }
+        List<Integer> vals = new ArrayList<Integer>();
+        // add all vals in order to arrayList
+        // then we use two pointers to find if a sum exists 
+        traverse(root, vals);
+        int left = 0;
+        int right = vals.size() - 1;
     
-    public boolean traverse(TreeNode root, int k) {
-        
-        // pre-order top down DFS - root, left, right 
-        
-        // if a sum exists return true 
-        if(checkVals(root.val, k)) return true;
-        possibleVals.add(root.val);
-        
-        if( (root.left != null &&traverse(root.left, k)) || (root.right != null && traverse(root.right, k)))  return true;
-        
-        return false;
-        
-    }
-    
-    public boolean checkVals(int check, int k) {
-        // checks if any value in possibleVals + the current value sum to k
-        for(Integer i : possibleVals) {
-            if(i + check == k) return true;
+        while(left < right) {
+            int sum = vals.get(left) + vals.get(right);
+            if( sum == k) return true;
+            if(sum < k) left++;
+            if(sum > k) right--;
         }
+        
         return false;
+        
     }
+    
+    public void traverse(TreeNode root, List<Integer> vals) {
+        // inorder DFS 
+        // left, root, right
+        if(root == null) return;
+        traverse(root.left, vals);
+        vals.add(root.val);
+        traverse(root.right, vals);
+        return;
+    }
+    
 }
