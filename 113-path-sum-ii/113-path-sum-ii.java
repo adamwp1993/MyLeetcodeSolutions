@@ -32,8 +32,8 @@ class Solution {
             paths.add(currentPath);
             return;
         }
-        if(root.left != null) traverse(root.left, targetSum, new ArrayList<Integer>(currentPath), sum);
-        if(root.right != null) traverse(root.right, targetSum, new ArrayList<Integer>(currentPath), sum);
+        traverse(root.left, targetSum, new ArrayList<Integer>(currentPath), sum);
+        traverse(root.right, targetSum, new ArrayList<Integer>(currentPath), sum);
         
         return;
     }
