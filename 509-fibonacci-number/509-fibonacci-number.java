@@ -1,15 +1,26 @@
 class Solution {
     public int fib(int n) {
-        // DP 
+        // recursive solution bottom up
         if(n <= 1) return n;
-
-
-        int[] vals = new int[n + 1];
+        
+        int[] vals = new int[2];
         vals[1] = 1;
-        for(int i = 2; i <= n; i++) {
-            vals[i] = vals[i - 1] + vals[i - 2];
+        
+        calc(vals, 2, n);
+        return vals[1];
+
+    }
+    
+    public int[] calc(int[] vals, int step, int n) {
+        if(step > n) {
+            return vals;
         }
-        return vals[n];
+        int current = vals[0] + vals[1];
+        vals[0] = vals[1];
+        vals[1] = current;
+        
+        vals = calc(vals, step + 1, n);
+        return vals;
     }
 
 }
