@@ -1,5 +1,6 @@
 class Solution {
     public int minSubArrayLen(int target, int[] nums) {
+        // Sliding window Pattern 
         int smallestLength = Integer.MAX_VALUE;
         
         // create range 
