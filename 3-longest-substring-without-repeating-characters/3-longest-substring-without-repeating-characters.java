@@ -1,32 +1,25 @@
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        // Brute force 
-        int longest = 0;
-        char[] chars = s.toCharArray();
-        
-        if(chars.length == 1) return 1;
-        
-        for(int i = 0; i < chars.length; i++) {
-            HashSet<Character> vals = new HashSet<Character>();
-            int length = 0;
-            for(int j = i; j < chars.length; j++) {
-                if(vals.contains(chars[j])) {
-                    // check against res. if its longer, update res 
-                    if(length > longest) {
-                        longest = length;
-                    }
-                    break;
-                }
-                length++;
-                vals.add(chars[j]);
+        // sliding window O(N)
+        // init range and vars
+        int left = 0, right = 0, longest = 0;
+        // Hash table stores character as key and last index character was encountered as value
+        char[] vals = s.toCharArray();
+        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
+        // expand window until subarray not valid 
+        for(; right < vals.length; right++) {
             
+            // contract window until subarray is valid 
+            // could have just used an if statement here 
+           if(map.containsKey(vals[right])) {
+                // remove to right most instance of that char so there is no dupe  
+                left = Math.max(left, map.get(vals[right]) + 1);
             }
-            if(length > longest) {
-                        longest = length;
-            }
+            map.put(vals[right], right);
+            longest = Math.max(longest, right - left + 1);
+              
             
         }
         return longest;
-    
     }
 }
