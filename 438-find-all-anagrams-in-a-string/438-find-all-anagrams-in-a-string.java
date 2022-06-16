@@ -19,16 +19,8 @@ class Solution {
         for(int right = 0; right < s.length(); right++) {
             ++scounter[s.charAt(right) - 'a'];
             // check if window is valid 
-            boolean valid = true;
-            for(int j = 0; j < p.length(); j++) {
-                if(pcounter[p.charAt(j) - 'a'] != scounter[p.charAt(j) - 'a']) {
-                    valid = false;
-                    break;
-                }
-            }
-            if(valid) {
-                result.add(left);
-            }
+            
+            if(Arrays.equals(scounter, pcounter)) result.add(left);
             // slide window right 
             if(right - left + 1 == p.length()) {
                 --scounter[s.charAt(left) - 'a'];
