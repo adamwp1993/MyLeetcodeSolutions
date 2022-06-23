@@ -11,25 +11,38 @@
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        // O(N + M) runtime O(N) space - brute force 
-        // how can we avoid using O(N) space? could a fast and slow pointer work here?
-        // loop through with fast and slow pointers, until we get a match. 
-        // if
-        HashSet<ListNode> seen = new HashSet<ListNode>();
-        // store all nodes from one list into hashset 
-        ListNode current = headA;
-        while(current != null) {
-            seen.add(current);
-            current = current.next;
+        // two pointers 
+        // find shorter linkedList 
+        int countA = length(headA);
+        int countB = length(headB);
+        // move to same start
+        while(countA > countB) {
+            headA = headA.next;
+            countA--;
         }
-        // return first node that exists in both 
-        current = headB;
-        while(current != null) {
-            if(seen.contains(current)) {
-                return current;
-            }
-            current = current.next;
+        while(countB > countA) {
+            headB = headB.next;
+            countB--;
         }
-        return null;
+        
+        while(headA != headB) {
+            headA = headA.next;
+            headB = headB.next;
+        }
+        return headA;
+        
+
+        
+        
     }
+    
+    private int length(ListNode node) {
+        int length = 0;
+        while (node != null) {
+            node = node.next;
+            length++;
+        }
+        return length;
+    }
+     
 }
