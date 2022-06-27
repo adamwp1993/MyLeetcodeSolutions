@@ -10,29 +10,23 @@
  */
 class Solution {
     public ListNode deleteMiddle(ListNode head) {
-        int count = 0;
+        
         // create sentinel node to protect from nullPointers 
         ListNode sentinel = new ListNode(0);
         sentinel.next = head;
-        
-        // get length of list 
-        ListNode current = head;
-        while(current != null) {
-            count++;
-            current = current.next;
-        }
-        int mid = count / 2;
-        count = 0;
-        // navigate to middle node 
+        // fast and slow pointers 
+        ListNode fast = head;
+        ListNode slow = head;
         ListNode prev = sentinel;
-        current = head;
-        while(count != mid) {
-            count++;
-            prev = current;
-            current = current.next;
+        // fast moves two nodes, slow 1. 
+        while(fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            prev = prev.next;
         }
-        // once node is found, update pointer and return 
-        prev.next = current.next;
+        // when loop terminates we have found node to be deleted 
+        prev.next = slow.next;
         return sentinel.next;
+        
     }
 }
