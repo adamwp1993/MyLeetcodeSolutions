@@ -51,13 +51,13 @@ class Solution {
         
     }
     */
-        List<List<Integer>> x = new ArrayList<>();
+        List<List<Integer>> graph = new ArrayList<>();
     public long countPairs(int n, int[][] edges) {
         for(int i=0; i<n; i++)
-            x.add(new ArrayList<>());
+            graph.add(new ArrayList<>());
         for(int [] edge : edges){
-            x.get(edge[0]).add(edge[1]);  // make graph
-            x.get(edge[1]).add(edge[0]);
+            graph.get(edge[0]).add(edge[1]);  // make graph
+            graph.get(edge[1]).add(edge[0]);
         }
 
         long res = 0, sum = n;
@@ -75,7 +75,7 @@ class Solution {
         if(visited[node]) return count[0];
         visited[node] = true;
         count[0]++;
-        for(int curr : x.get(node))
+        for(int curr : graph.get(node))
             dfs(curr, visited, count);
         return count[0];
     }
