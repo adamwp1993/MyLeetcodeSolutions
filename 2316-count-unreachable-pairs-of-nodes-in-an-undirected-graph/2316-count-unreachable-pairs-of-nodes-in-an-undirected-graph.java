@@ -1,15 +1,14 @@
 class Solution {
     
-    /*
+    
     List<List<Integer>> graph = new ArrayList<>();
     
     public long countPairs(int n, int[][] edges) {
         
         // populate edges into graph
        
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < n; i++) 
             graph.add(new ArrayList<>());
-        }
         for(int [] edge : edges) {
             graph.get(edge[0]).add(edge[1]);
             graph.get(edge[1]).add(edge[0]);
@@ -17,14 +16,14 @@ class Solution {
         
 
         // run dfs 
-        long unConnected = 0;
-        int sum = n;
+        long unConnected = 0, sum = n;
+        
         boolean[] visited = new boolean[n];
         
         for(int i = 0; i < n; i++) {
             if(!visited[i]) {
                 int nodeCount = dfs( visited, i, new int[1]);
-                sum = sum - nodeCount;
+                sum = sum-nodeCount;
                 unConnected += nodeCount * sum;
             }  
         }
@@ -50,7 +49,7 @@ class Solution {
         return count[0];
         
     }
-    */
+    /*
         List<List<Integer>> graph = new ArrayList<>();
     public long countPairs(int n, int[][] edges) {
         for(int i=0; i<n; i++)
@@ -79,4 +78,5 @@ class Solution {
             dfs(curr, visited, count);
         return count[0];
     }
+    */
 }
