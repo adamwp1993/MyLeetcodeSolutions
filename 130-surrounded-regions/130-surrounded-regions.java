@@ -9,7 +9,7 @@ class Solution {
                 List<List<Integer>> overwriteCoords = new ArrayList<>();
                 
                 // if the component is surrounded (DFS returns false), overwrite all cells in the component 
-                if(!dfs(board, i, j, visited, overwriteCoords)) {
+                if(board[i][j] == 'O' && !dfs(board, i, j, visited, overwriteCoords)) {
                     overwrite(board, overwriteCoords);
                 }
                 
