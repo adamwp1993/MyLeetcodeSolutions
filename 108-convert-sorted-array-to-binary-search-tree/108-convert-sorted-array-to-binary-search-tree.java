@@ -15,19 +15,21 @@
  */
 class Solution {
     public TreeNode sortedArrayToBST(int[] nums) {
-        return buildTree(nums, 0, nums.length - 1);
-    }
-    
-    public TreeNode buildTree(int[] nums, int start, int end) {
-        if(start > end) return null;
-        int mid = (start + end) / 2;
+        if(nums.length == 0) return null;
         
-        // make the midPoint the root 
-        TreeNode root = new TreeNode(nums[mid]);
-        // recursively build subTrees
-        root.left = buildTree(nums, start, mid - 1);
-        root.right = buildTree(nums, mid + 1, end);
-        
+        TreeNode root = bst(nums, 0, nums.length - 1);
         return root;
     }
+    
+    public TreeNode bst(int[] nums, int startIndex, int endIndex) {
+        if(startIndex > endIndex || startIndex < 0 || endIndex >= nums.length) return null;
+        
+        int index = (startIndex + endIndex) / 2;
+        TreeNode newNode = new TreeNode(nums[index]);
+        newNode.left = bst(nums, startIndex, index - 1);
+        newNode.right = bst(nums, index + 1, endIndex);
+        
+        return newNode;
+    }
+
 }
