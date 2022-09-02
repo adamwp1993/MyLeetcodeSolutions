@@ -14,47 +14,31 @@
  * }
  */
 class Solution {
-    public List<List<Integer>> levels = new ArrayList<List<Integer>>();
-    
-    // level order BFS traversal 
-    // traverse the tree and create a 2D array of integers
-    // then we will use that List to calculate averages. 
     public List<Double> averageOfLevels(TreeNode root) {
-        List<Double> averages = new ArrayList<Double>();
+        List<Double> averages = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
         
-        if(root == null) return averages;
-        
-        traverse(root, 0); 
-        // calculate averages 
-        
-        for(int i = 0; i < levels.size(); i++) {
-            double sum = 0.0;
-            for(int j = 0; j < levels.get(i).size(); j++) {
-                sum += levels.get(i).get(j);
+        while(!q.isEmpty()) {
+            long sum = 0;
+            int size = q.size();
+            for(int i = 0; i < size; i++) {
+                TreeNode current = q.poll();
+                // add the vals from the level to the sum 
+                sum += current.val;
+                // add children to the queue 
+                if(current.left != null) {
+                    q.add(current.left);
+                }
+                if(current.right != null) {
+                    q.add(current.right);
+                }
+                
             }
-            averages.add((Double)sum / levels.get(i).size());
-            
+            // find the average for that level and add it to the result 
+            double avg = (double)sum / size;
+            averages.add(avg);
         }
-        
         return averages;
-        
-    }
-    
-    public void traverse(TreeNode node, int level) {
-        // Add a level to the 2D list 
-        if (levels.size() == level) {
-            levels.add(new ArrayList<Integer>());
-        }
-
-         // add the root value
-         levels.get(level).add(node.val);
-
-         // recursively call for child nodes 
-         if (node.left != null) {
-            traverse(node.left, level + 1);
-         }
-         if (node.right != null) {
-            traverse(node.right, level + 1);
-         }
     }
 }
